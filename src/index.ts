@@ -13,8 +13,8 @@ console.log(users.sortList("desc")) //Expect to see users array in new order of 
 /** find user by email.
  * Take a parameter of type string.
  * Return a found user or null*/
-const findUserByEmail = (email) => {
-    users.find(user => user.email === email)
+const findUserByEmail = (email : string) => {
+    users.find(user => user.email === email ? user.email : null)
 }
 const foundUser = findUserByEmail("john@mail.com")
 console.log(foundUser) //expect to see user with email "john@mail.com" in the console
@@ -23,8 +23,8 @@ console.log(foundUser) //expect to see user with email "john@mail.com" in the co
  * Take a parameter of type string.
  * Return an array
  */
-const findProductsByText = (search) => {
-    products.filter(products => products.title === search)
+const findProductsByText = (search : string) => {
+    products.filter(products => products.title && products.title.toLocaleLowerCase().includes(search.toLocaleLowerCase()) )
 }
 const foundProducts = findProductsByText("shirt")
 console.log(foundProducts) //expect to see an array of all found products

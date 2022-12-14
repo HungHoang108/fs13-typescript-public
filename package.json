@@ -1,7 +1,7 @@
 {
   "name": "typescript",
   "version": "1.0.0",
-  "description": "",
+  "description": "- Complete two challenges: banking application & fetching e-commerce data.\r - Check the scripts in `package.json` to run the suitable command for each challenge",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch:index": "nodemon src/index.ts",
@@ -12,5 +12,14 @@
   "license": "ISC",
   "dependencies": {
     "ts-node": "^10.9.1"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HungHoang108/fs13-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HungHoang108/fs13-typescript/issues"
+  },
+  "homepage": "https://github.com/HungHoang108/fs13-typescript#readme"
 }
