@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^3.3.0",
+    "randomstring": "^1.2.3",
     "ts-node": "^10.9.1"
   },
   "main": "index.js",

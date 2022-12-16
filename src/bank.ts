@@ -1,5 +1,5 @@
 import { type } from "os";
-import { Branch } from "./types/branch";
+import { Branch } from "./branch";
 import { Customer } from "./types/customer";
 
 class Bank {

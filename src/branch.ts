@@ -1,16 +1,16 @@
-import { Customer } from "./customer";
+import { Customer } from "./types/customer";
 
 export class Branch {
-  name: string;
-  customers: Array<Customer>;
-  constructor(name: string) {
+  private name: string;
+  private customers: Array<Customer>;
+  private constructor(name: string) {
     this.name = name;
     this.customers = [];
   }
-  getName() {
+  get getName() {
     return this.name;
   }
-  getCustomers() {
+  get getCustomers() {
     return this.customers.map((customer) => customer.name);
   }
   addCustomer(customer: Customer): boolean {
@@ -29,14 +29,13 @@ export class Branch {
       return false;
     }
   }
-  findCustomer(customerId : string) : Customer | null {
+  findCustomer(customerId: string): Customer | null {
     // this.customers.map(customer => customer.id === customerId)
-    this.customers.find(customer => {
-        if(customer.id === customerId) {
-            return customer
-        } 
-    })
-    return null
-
+    this.customers.find((customer) => {
+      if (customer.id === customerId) {
+        return customer;
+      }
+    });
+    return null;
   }
 }
