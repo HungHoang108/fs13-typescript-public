@@ -2,7 +2,7 @@ import { Transaction } from "./types/transaction";
 var randomstring = require("randomstring");
 
 
-class Customer {
+export class Customer {
     private name: string;
     private id: string;
     private transactions: Array<Transaction>;
@@ -13,7 +13,6 @@ class Customer {
         this.transactions = []
     }
 
-    
     getName() {
         return this.name;
     }

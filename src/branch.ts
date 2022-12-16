@@ -1,4 +1,4 @@
-import { Customer } from "./types/customer";
+import { Customer } from "./customer";
 
 export class Branch {
   private name: string;
@@ -7,32 +7,37 @@ export class Branch {
     this.name = name;
     this.customers = [];
   }
-  get getName() {
+  getName() {
     return this.name;
   }
-  get getCustomers() {
-    return this.customers.map((customer) => customer.name);
+  getCustomers() {
+    return this.customers
   }
   addCustomer(customer: Customer): boolean {
     this.customers.map((cus) => {
-      if (cus.id === customer.id) {
+      if (cus.getId() === customer.getId()) {
         return false;
       }
     });
+    this.customers.push(customer)
     return true;
   }
 
   addCustomerTransaction(cusId: string, transactionAmount: number): boolean {
-    if (cusId && transactionAmount) {
+    if (transactionAmount) {
+      this.customers.find(customer => {
+        if(customer.getId() === cusId){
+          customer.addTransaction(transactionAmount)
+        }
+      } )
       return true;
     } else {
       return false;
     }
   }
   findCustomer(customerId: string): Customer | null {
-    // this.customers.map(customer => customer.id === customerId)
     this.customers.find((customer) => {
-      if (customer.id === customerId) {
+      if (customer.getId() === customerId) {
         return customer;
       }
     });

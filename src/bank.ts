@@ -1,11 +1,10 @@
-import { type } from "os";
 import { Branch } from "./branch";
-import { Customer } from "./types/customer";
+import { Customer } from "./customer";
 
 class Bank {
   private name: string;
   private branches: Branch[];
-  public constructor(name: string) {
+  constructor(name: string) {
     this.name = name;
     this.branches = [];
   }
@@ -21,14 +20,14 @@ class Bank {
   addCustomer(branch: Branch, customer: Customer): boolean {
     if (
       this.branches.find((branch) =>
-        branch.customers.find((cus) => cus.id === customer.id)
+        branch.getCustomers().find((cus) => cus.getId() === customer.getId())
       )
     ) {
       return false;
     }
     this.branches.find((b) => {
-      if (b.name === branch.name) {
-        b.customers.push(customer);
+      if (b.getName() === branch.getName()) {
+        b.getCustomers().push(customer);
       }
     });
     return true;
@@ -41,10 +40,10 @@ class Bank {
   ): boolean {
     if (amount) {
       this.branches.find((b) => {
-        if (b.name === branch.name) {
-          b.customers.find((cus) => {
-            if (cus.id === customerId) {
-              cus.transactionAmount = amount;
+        if (b.getName() === branch.getName()) {
+          b.getCustomers().find((cus) => {
+            if (cus.getId() === customerId) {
+              cus.addTransaction(amount);
               return true;
             }
           });
@@ -56,7 +55,7 @@ class Bank {
 
   findBranchByName(branchName: string): Array<Branch> | null {
     this.branches.map((b) => {
-      if (b.name === branchName) {
+      if (b.getName() === branchName) {
         return b;
       }
     });
@@ -64,7 +63,7 @@ class Bank {
   }
 
   checkBranch(branch: Branch): boolean {
-    if (this.branches.find((b) => b.name === branch.name)) {
+    if (this.branches.find((b) => b.getName() === branch.getName())) {
       return false;
     }
     return true;
