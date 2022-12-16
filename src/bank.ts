@@ -1,79 +1,32 @@
-import { Branch } from "./branch";
-import { Customer } from "./customer";
+import { Bank } from "./bank/types/bank";
+import { Branch } from "./bank/types/branch";
+import {Customer} from "./bank/types/customer";
 
-class Bank {
-  private name: string;
-  private branches: Branch[];
-  constructor(name: string) {
-    this.name = name;
-    this.branches = [];
-  }
+const arizonaBank = new Bank("Arizona")
+const westBranch = new Branch("West Branch")
+const sunBranch = new Branch("Sun Branch")
+const customer1 = new Customer("John")
+const customer2 = new Customer("Anna")
+const customer3 = new Customer("John")
 
-  addBranch(branch: Branch): boolean {
-    if (this.checkBranch(branch) === true) {
-      this.branches.push(branch);
-      return true;
-    } else {
-      return false;
-    }
-  }
-  addCustomer(branch: Branch, customer: Customer): boolean {
-    if (
-      this.branches.find((branch) =>
-        branch.getCustomers().find((cus) => cus.getId() === customer.getId())
-      )
-    ) {
-      return false;
-    }
-    this.branches.find((b) => {
-      if (b.getName() === branch.getName()) {
-        b.getCustomers().push(customer);
-      }
-    });
-    return true;
-  }
+arizonaBank.addBranch(westBranch)
+arizonaBank.addBranch(sunBranch)
+arizonaBank.addBranch(westBranch) 
 
-  addCustomerTransaction(
-    branch: Branch,
-    customerId: string,
-    amount: number
-  ): boolean {
-    if (amount) {
-      this.branches.find((b) => {
-        if (b.getName() === branch.getName()) {
-          b.getCustomers().find((cus) => {
-            if (cus.getId() === customerId) {
-              cus.addTransaction(amount);
-              return true;
-            }
-          });
-        }
-      });
-    }
-    return false;
-  }
+arizonaBank.findBranchByName("bank")
+arizonaBank.findBranchByName("sun")
 
-  findBranchByName(branchName: string): Array<Branch> | null {
-    this.branches.map((b) => {
-      if (b.getName() === branchName) {
-        return b;
-      }
-    });
-    return null;
-  }
+arizonaBank.addCustomer(westBranch, customer1)
+//arizonaBank.addCustomer(westBranch, customer2) //Just Checking
+arizonaBank.addCustomer(westBranch, customer3)
+arizonaBank.addCustomer(sunBranch, customer1)
+arizonaBank.addCustomer(sunBranch, customer2)
 
-  checkBranch(branch: Branch): boolean {
-    if (this.branches.find((b) => b.getName() === branch.getName())) {
-      return false;
-    }
-    return true;
-  }
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 3000)
+arizonaBank.addCustomerTransaction(westBranch, customer1.getId(), 2000)
+arizonaBank.addCustomerTransaction(westBranch, customer2.getId(), 3000)
 
-  listCustomers(branch: Branch, bool: boolean): boolean {
-    if (branch) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-}
+customer1.addTransactions(-1000)
+console.log(customer1.getBalance())
+console.log(arizonaBank.listCustomers(westBranch, true))
+console.log(arizonaBank.listCustomers(sunBranch,true))

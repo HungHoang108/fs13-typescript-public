@@ -3,7 +3,7 @@ import { Customer } from "./customer";
 export class Branch {
   private name: string;
   private customers: Array<Customer>;
-  private constructor(name: string) {
+  constructor(name: string) {
     this.name = name;
     this.customers = [];
   }
@@ -11,7 +11,7 @@ export class Branch {
     return this.name;
   }
   getCustomers() {
-    return this.customers
+    return this.customers;
   }
   addCustomer(customer: Customer): boolean {
     this.customers.map((cus) => {
@@ -19,17 +19,17 @@ export class Branch {
         return false;
       }
     });
-    this.customers.push(customer)
+    this.customers.push(customer);
     return true;
   }
 
   addCustomerTransaction(cusId: string, transactionAmount: number): boolean {
     if (transactionAmount) {
-      this.customers.find(customer => {
-        if(customer.getId() === cusId){
-          customer.addTransaction(transactionAmount)
+      this.customers.find((customer) => {
+        if (customer.getId() === cusId) {
+          customer.addTransactions(transactionAmount);
         }
-      } )
+      });
       return true;
     } else {
       return false;
